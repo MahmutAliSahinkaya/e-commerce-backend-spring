@@ -1,0 +1,534 @@
+services:
+  users_db:
+    container_name: users_db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: users_db
+    extends:
+      file: common-config.yml
+      service: network-db-service
+
+  products_db:
+    container_name: products_db
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: products_db
+    extends:
+      file: common-config.yml
+      service: network-db-service
+
+  orders_db:
+    container_name: orders_db
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_DATABASE: orders_db
+    extends:
+      file: common-config.yml
+      service: network-db-service
+
+  payments_db:
+    container_name: payments_db
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_DATABASE: payments_db
+    extends:
+      file: common-config.yml
+      service: network-db-service
+
+  shippings_db:
+    container_name: shippings_db
+    ports:
+      - "3310:3306"
+    environment:
+      MYSQL_DATABASE: shippings_db
+    extends:
+      file: common-config.yml
+      service: network-db-service
+
+  favourites_db:
+    container_name: favourites_db
+    ports:
+      - "3311:3306"
+    environment:
+      MYSQL_DATABASE: favourites_db
+    extends:
+      file: common-config.yml
+      service: network-db-service
+
+  reports_db:
+    container_name: reports_db
+    ports:
+      - "3312:3306"
+    environment:
+      MYSQL_DATABASE: reports_db
+    extends:
+      file: common-config.yml
+      service: network-db-service
+
+  kafka:
+    image: docker.io/bitnami/kafka:3.5
+    ports:
+      - "9092:9092"
+    volumes:
+      - "kafka_data:/bitnami"
+    environment:
+      # KRaft settings
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      # Listeners
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
+  read:
+    image: grafana/loki:2.8.3
+    command: "-config.file=/etc/loki/config.yaml -target=read"
+    ports:
+      - 3101:3100
+      - 7946
+      - 9095
+    volumes:
+      - ../observability/loki/loki-config.yaml:/etc/loki/config.yaml
+    depends_on:
+      - minio
+    healthcheck:
+      test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3100/ready || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks: &loki-dns
+      ecommerce:
+        aliases:
+          - loki
+
+  write:
+    image: grafana/loki:2.8.3
+    command: "-config.file=/etc/loki/config.yaml -target=write"
+    ports:
+      - 3102:3100
+      - 7946
+      - 9095
+    volumes:
+      - ../observability/loki/loki-config.yaml:/etc/loki/config.yaml
+    healthcheck:
+      test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3100/ready || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      - minio
+    networks:
+      <<: *loki-dns
+
+  promtail:
+    image: grafana/promtail:2.8.3
+    volumes:
+      - ../observability/promtail/promtail-local-config.yaml:/etc/promtail/config.yaml:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: -config.file=/etc/promtail/config.yaml
+    depends_on:
+      - gateway
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
+  minio:
+    image: minio/minio
+    entrypoint:
+      - sh
+      - -euc
+      - |
+        mkdir -p /data/loki-data && \
+        mkdir -p /data/loki-ruler && \
+        minio server /data
+    environment:
+      - MINIO_ROOT_USER=loki
+      - MINIO_ROOT_PASSWORD=supersecret
+      - MINIO_PROMETHEUS_AUTH_TYPE=public
+      - MINIO_UPDATE=off
+    ports:
+      - 9000
+    volumes:
+      - ./.data/minio:/data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 15s
+      timeout: 20s
+      retries: 5
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
+  prometheus:
+    image: prom/prometheus:v2.45.0
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ../observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
+  tempo:
+    image: grafana/tempo
+    container_name: tempo
+    command: -config.file /etc/tempo-config.yml
+    ports:
+      - "3110:3100"
+      - "4317:4317"
+    volumes:
+      - ../observability/tempo/tempo.yml:/etc/tempo-config.yml
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    depends_on:
+      - gateway
+    entrypoint:
+      - sh
+      - -euc
+      - |
+        /run.sh
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../observability/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+    healthcheck:
+      test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
+  gateway:
+    image: nginx:latest
+    depends_on:
+      - read
+      - write
+    entrypoint:
+      - sh
+      - -euc
+      - |
+        cat <<EOF > /etc/nginx/nginx.conf
+        user  nginx;
+        worker_processes  5;  ## Default: 1
+
+        events {
+          worker_connections   1000;
+        }
+
+        http {
+          resolver 127.0.0.11;
+
+          server {
+            listen             3100;
+
+            location = / {
+              return 200 'OK';
+              auth_basic off;
+            }
+
+            location = /api/prom/push {
+              proxy_pass       http://write:3100\$$request_uri;
+            }
+
+            location = /api/prom/tail {
+              proxy_pass       http://read:3100\$$request_uri;
+              proxy_set_header Upgrade \$$http_upgrade;
+              proxy_set_header Connection "upgrade";
+            }
+
+            location ~ /api/prom/.* {
+              proxy_pass       http://read:3100\$$request_uri;
+            }
+
+            location = /loki/api/v1/push {
+              proxy_pass       http://write:3100\$$request_uri;
+            }
+
+            location = /loki/api/v1/tail {
+              proxy_pass       http://read:3100\$$request_uri;
+              proxy_set_header Upgrade \$$http_upgrade;
+              proxy_set_header Connection "upgrade";
+            }
+
+            location ~ /loki/api/.* {
+              proxy_pass       http://read:3100\$$request_uri;
+            }
+          }
+        }
+        EOF
+        /docker-entrypoint.sh nginx -g "daemon off;"
+    ports:
+      - "3100:3100"
+    healthcheck:
+      test: [ "CMD", "service", "nginx", "status" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
+  configserver:
+    image: "mahmutali/configserver:v1"
+    container_name: configserver
+    ports:
+      - "8071:8071"
+    healthcheck:
+      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-base-config
+    environment:
+      OTEL_SERVICE_NAME: "configserver"
+
+  eureka-server:
+    image: "mahmutali/eureka-server:v1"
+    container_name: eureka-server
+    ports:
+      - "8070:8070"
+    healthcheck:
+      test: "curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+    environment:
+      SPRING_APPLICATION_NAME: "eureka-server"
+      OTEL_SERVICE_NAME: "eureka-server"
+
+  user-service:
+    image: "mahmutali/user-service:v1"
+    container_name: user-service
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    environment:
+      SPRING_APPLICATION_NAME: "user-service"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://users_db:3306/users_db"
+      OTEL_SERVICE_NAME: "user-service"
+      SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS: "kafka:9092"
+      JWT_SECRET: "mySecretKey"
+      JWT_EXPIRE_MS: "120000"
+      JWT_REFRESH_EXPIRATION_MS: "120000"
+    depends_on:
+      users_db:
+        condition: service_healthy
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
+
+  product-service:
+    image: "mahmutali/product-service:v1"
+    container_name: product-service
+    healthcheck:
+      test: "curl --fail --silent localhost:8081/actuator/health/readiness | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    environment:
+      SPRING_APPLICATION_NAME: "product-service"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://products_db:3306/products_db"
+      OTEL_SERVICE_NAME: "product-service"
+      JWT_SECRET: "mySecretKey"
+      JWT_EXPIRE_MS: "120000"
+      JWT_REFRESH_EXPIRATION_MS: "120000"
+    depends_on:
+      products_db:
+        condition: service_healthy
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
+
+  order-service:
+    image: "mahmutali/order-service:v1"
+    container_name: order-service
+    healthcheck:
+      test: "curl --fail --silent localhost:8082/actuator/health/readiness | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    environment:
+      SPRING_APPLICATION_NAME: "order-service"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://orders_db:3306/orders_db"
+      OTEL_SERVICE_NAME: "order-service"
+      JWT_SECRET: "mySecretKey"
+      JWT_EXPIRE_MS: "120000"
+      JWT_REFRESH_EXPIRATION_MS: "120000"
+    depends_on:
+      orders_db:
+        condition: service_healthy
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
+
+  payment-service:
+    image: "mahmutali/payment-service:v1"
+    container_name: payment-service
+    healthcheck:
+      test: "curl --fail --silent localhost:8083/actuator/health/readiness | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    environment:
+      SPRING_APPLICATION_NAME: "payment-service"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://payments_db:3306/payments_db"
+      OTEL_SERVICE_NAME: "payment-service"
+      JWT_SECRET: "mySecretKey"
+      JWT_EXPIRE_MS: "120000"
+      JWT_REFRESH_EXPIRATION_MS: "120000"
+    depends_on:
+      payments_db:
+        condition: service_healthy
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
+
+  shipping-service:
+    image: "mahmutali/shipping-service:v1"
+    container_name: shipping-service
+    healthcheck:
+      test: "curl --fail --silent localhost:8084/actuator/health/readiness | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    environment:
+      SPRING_APPLICATION_NAME: "shipping-service"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://shippings_db:3306/shippings_db"
+      OTEL_SERVICE_NAME: "shipping-service"
+      JWT_SECRET: "mySecretKey"
+      JWT_EXPIRE_MS: "120000"
+      JWT_REFRESH_EXPIRATION_MS: "120000"
+    depends_on:
+      shippings_db:
+        condition: service_healthy
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
+
+  favourite-service:
+    image: "mahmutali/favourite-service:v1"
+    container_name: favourite-service
+    healthcheck:
+      test: "curl --fail --silent localhost:8085/actuator/health/readiness | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    environment:
+      SPRING_APPLICATION_NAME: "favourite-service"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://favourites_db:3306/favourites_db"
+      OTEL_SERVICE_NAME: "favourite-service"
+      JWT_SECRET: "mySecretKey"
+      JWT_EXPIRE_MS: "120000"
+      JWT_REFRESH_EXPIRATION_MS: "120000"
+    depends_on:
+      favourites_db:
+        condition: service_healthy
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
+
+  report-service:
+    image: "mahmutali/report-service:v1"
+    container_name: report-service
+    healthcheck:
+      test: "curl --fail --silent localhost:8086/actuator/health/readiness | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    environment:
+      SPRING_APPLICATION_NAME: "report-service"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://reports_db:3306/reports_db"
+      OTEL_SERVICE_NAME: "report-service"
+      JWT_SECRET: "mySecretKey"
+      JWT_EXPIRE_MS: "120000"
+      JWT_REFRESH_EXPIRATION_MS: "120000"
+    depends_on:
+      reports_db:
+        condition: service_healthy
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
+
+  notification-service:
+    image: "mahmutali/notification-service:v1"
+    container_name: notification-service
+    environment:
+      SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS: "kafka:9092"
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
+  api-gateway:
+    image: "mahmutali/api-gateway:v1"
+    container_name: api-gateway
+    ports:
+      - "8072:8072"
+    depends_on:
+      user-service:
+        condition: service_healthy
+      product-service:
+        condition: service_healthy
+      order-service:
+        condition: service_healthy
+      payment-service:
+        condition: service_healthy
+      shipping-service:
+        condition: service_healthy
+      favourite-service:
+        condition: service_healthy
+      report-service:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "api-gateway"
+      OTEL_SERVICE_NAME: "api-gateway"
+      JWT_SECRET: "mySecretKey"
+      JWT_EXPIRE_MS: "120000"
+      JWT_REFRESH_EXPIRATION_MS: "120000"
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
+
+volumes:
+  kafka_data:
+    driver: local
+
+networks:
+  ecommerce:
+    driver: "bridge"
