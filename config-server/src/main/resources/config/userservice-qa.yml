@@ -1,0 +1,9 @@
+build:
+  version: "2.0"
+
+userservice:
+  message: "E-Commerce-App user service test stage APIs"
+  contactDetails:
+    name: "Mahmut Ali Şahinkaya - Developer"
+    email: "mahmutsahinkaya@gmail.com"
+    linkedin: "https://www.linkedin.com/in/mahmutalisahinkaya/"

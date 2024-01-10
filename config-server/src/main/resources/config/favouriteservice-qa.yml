@@ -1,0 +1,10 @@
+build:
+  version: "2.0"
+
+favouriteservice:
+  message: "E-Commerce-App favourite service test stage APIs"
+  contactDetails:
+    name: "Mahmut Ali Şahinkaya - Developer"
+    email: "mahmutsahinkaya@gmail.com"
+    linkedin: "https://www.linkedin.com/in/mahmutalisahinkaya/"
+

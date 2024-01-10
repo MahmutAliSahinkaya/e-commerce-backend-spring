@@ -1,0 +1,10 @@
+build:
+  version: "3.0"
+
+paymentservice:
+  message: "E-Commerce-App payment service development APIs"
+  contactDetails:
+    name: "Mahmut Ali Şahinkaya - Developer"
+    email: "mahmutsahinkaya@gmail.com"
+    linkedin: "https://www.linkedin.com/in/mahmutalisahinkaya/"
+

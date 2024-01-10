@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: "configserver"
+  profiles:
+    active: git
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/MahmutAliSahinkaya/config-server-repo.git
+          default-label: main
+          timeout: 5
+          clone-on-start: true
+          force-pull: true
+          username: "{cipher}bbd0c5d1d584a9346eb646c388816987d6af20c277117ab2d7f4c1ff00c56b8051c8503b65667bca4d16bd088dcf066e8af7a00df727a5299c842f5d07e61b9180caef112b9a590f5cd2e92ceccff737aa796161031f36e41d6770e2df1daa70794236bd6ead0e9c7dc79e5ed6fa5358"
+          password: "{cipher}bbd0c5d1d584a9346eb646c388816987d6af20c277117ab2d7f4c1ff00c56b8051c8503b65667bca4d16bd088dcf066e8af7a00df727a5299c842f5d07e61b9180caef112b9a590f5cd2e92ceccff737aa796161031f36e41d6770e2df1daa70794236bd6ead0e9c7dc79e5ed6fa5358"
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+encrypt:
+  key: "ckKSftTGsLV3q2HLkE25urAQn5jWXt0d"
+
+server:
+  port: 8071
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"

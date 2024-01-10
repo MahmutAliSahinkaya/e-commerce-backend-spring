@@ -1,0 +1,10 @@
+build:
+  version: "1.0"
+
+orderservice:
+  message: "E-Commerce-App order service production stage APIs"
+  contactDetails:
+    name: "Mahmut Ali Şahinkaya - Developer"
+    email: "mahmutsahinkaya@gmail.com"
+    linkedin: "https://www.linkedin.com/in/mahmutalisahinkaya/"
+
