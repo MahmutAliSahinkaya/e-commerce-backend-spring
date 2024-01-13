@@ -65,11 +65,11 @@ endpoints:
 
 eureka:
   instance:
-    prefer-ip-address: true
+    preferIpAddress: true
   client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
       defaultZone: http://localhost:8070/eureka/
 
 info:
