@@ -1,6 +1,6 @@
 package com.ecommerce.userservice.exception;
 
-import com.ecommerce.userservice.dto.response.ErrorResponseDto;
+import com.ecommerce.userservice.dto.ErrorResponseDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler({AddressNotFoundException.class, RefreshTokenException.class, RoleException.class, UserNotFoundException.class})
+    @ExceptionHandler({AddressNotFoundException.class, UserNotFoundException.class})
     public ResponseEntity<ErrorResponseDto> handleNotFoundExceptions(RuntimeException exception,
                                                                      WebRequest webRequest) {
         ErrorResponseDto errorResponseDTO = new ErrorResponseDto(

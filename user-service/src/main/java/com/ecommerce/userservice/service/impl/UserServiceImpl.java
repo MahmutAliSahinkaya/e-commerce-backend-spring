@@ -2,6 +2,7 @@ package com.ecommerce.userservice.service.impl;
 
 import com.ecommerce.userservice.dto.UserDto;
 import com.ecommerce.userservice.entity.User;
+import com.ecommerce.userservice.exception.UserAlreadyExistsException;
 import com.ecommerce.userservice.exception.UserNotFoundException;
 import com.ecommerce.userservice.mapper.UserMapper;
 import com.ecommerce.userservice.repository.UserRepository;
@@ -12,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,29 +27,21 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    @Override
-    public void saveUser(User user) {
+    public void createUser(UserDto userDto) {
+        log.info("Creating user with username: {}", userDto.username());
+        User user = UserMapper.maptoUser(userDto, new User());
+        userRepository.findByPhone(userDto.phone())
+                .ifPresent(u -> {
+                    throw new UserAlreadyExistsException("User already registered with given phone number: " + userDto.phone());
+                });
         userRepository.save(user);
+        log.info("User created with username: {}", userDto.username());
     }
 
-    @Override
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    @Override
-    public Boolean existsByUsername(String username) {
-        return userRepository.existsByUsername(username);
-    }
-
-    @Override
-    public Boolean existsByEmail(String email) {
-        return userRepository.existsByEmail(email);
-    }
-    @Override
     public User findById(Long userId) {
+        log.info("Getting user by id: {}", userId);
         return userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + userId));
+                .orElseThrow(() -> new UserNotFoundException("User not found with userId: " + userId));
     }
 
     @Override
@@ -68,18 +60,17 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
-    public UserDto updateUser(Long userId, UserDto userDto) {
-        log.info("Updating user with id: {}", userDto.userId());
-        User existingUser = userRepository.findById(userDto.userId())
-                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + userDto.userId()));
 
-        existingUser.setFirstName(userDto.firstName());
-        existingUser.setLastName(userDto.lastName());
-        existingUser.setUsername(userDto.username());
+    @Override
+    public void updateUser(Long userId, UserDto userDto) {
+        log.info("Updating user with id: {}", userId);
+        User existingUser = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + userId));
 
-        User updatedUser = userRepository.save(existingUser);
-        log.info("User updated with id: {}", userDto.userId());
-        return UserMapper.toDto(updatedUser);
+        UserMapper.maptoUser(userDto, existingUser);
+        userRepository.save(existingUser);
+
+        log.info("User updated with id: {}", userId);
     }
 
     @Override

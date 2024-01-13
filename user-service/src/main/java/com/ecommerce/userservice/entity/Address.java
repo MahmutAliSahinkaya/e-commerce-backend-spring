@@ -10,10 +10,10 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "address")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "address")
 public class Address extends BaseEntity implements Serializable {
 
     @Id

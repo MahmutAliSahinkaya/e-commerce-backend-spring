@@ -4,7 +4,6 @@ import com.ecommerce.userservice.dto.AddressDto;
 import com.ecommerce.userservice.service.AddressService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,7 +17,6 @@ public class AddressController {
     }
 
     @PostMapping("/{userId}")
-    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<AddressDto> addAddressToUser(@RequestBody AddressDto addressDto,
                                                        @PathVariable Long userId) {
         AddressDto savedAddress = addressService.addAddress(userId, addressDto);
@@ -26,7 +24,6 @@ public class AddressController {
     }
 
     @PutMapping("/{userId}/{addressId}")
-    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<AddressDto> updateAddressDetails(@PathVariable Long userId,
                                                            @PathVariable Long addressId,
                                                            @RequestBody AddressDto updatedAddressDto) {
@@ -35,7 +32,6 @@ public class AddressController {
     }
 
     @GetMapping("/{userId}/{addressId}")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<AddressDto> getAddressDetailsById(@PathVariable Long userId,
                                                             @PathVariable Long addressId) {
         AddressDto address = addressService.getAddress(userId, addressId);
@@ -43,7 +39,6 @@ public class AddressController {
     }
 
     @DeleteMapping("/{userId}/{addressId}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteAddressById(@PathVariable Long userId,
                                                   @PathVariable Long addressId) {
         addressService.deleteAddress(userId, addressId);

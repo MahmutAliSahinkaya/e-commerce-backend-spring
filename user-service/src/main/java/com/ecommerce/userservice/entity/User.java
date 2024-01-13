@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -34,19 +33,10 @@ public class User extends BaseEntity implements Serializable {
     @Column(unique = true, nullable = false)
     private String email;
 
-    private String password;
-
     @Column(name = "image_url")
     private String imageUrl;
     private String phone;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Address> addresses;
-
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
 
 }

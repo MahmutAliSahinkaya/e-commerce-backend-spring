@@ -36,4 +36,18 @@ public class UserMapper {
         return user;
     }
 
+    public static User maptoUser(UserDto userDto, User user) {
+        user.setUserId(userDto.userId());
+        user.setFirstName(userDto.firstName());
+        user.setLastName(userDto.lastName());
+        user.setUsername(userDto.username());
+        user.setImageUrl(userDto.imageUrl());
+        user.setEmail(userDto.email());
+        user.setPhone(userDto.phone());
+        user.setAddresses(userDto.addressDtos().stream()
+                .map(AddressMapper::toEntity)
+                .collect(Collectors.toSet()));
+        return user;
+    }
+
 }
