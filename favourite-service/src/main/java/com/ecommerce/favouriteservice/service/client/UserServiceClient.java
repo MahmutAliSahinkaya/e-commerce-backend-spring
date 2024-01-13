@@ -1,6 +1,7 @@
 package com.ecommerce.favouriteservice.service.client;
 
 import com.ecommerce.favouriteservice.dto.UserDto;
+import com.ecommerce.favouriteservice.service.fallback.UserFallback;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.cloud.openfeign.FeignClient;

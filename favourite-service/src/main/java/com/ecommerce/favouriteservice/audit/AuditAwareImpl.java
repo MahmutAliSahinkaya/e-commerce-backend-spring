@@ -1,5 +1,6 @@
 package com.ecommerce.favouriteservice.audit;
 
+import com.ecommerce.favouriteservice.exception.UserNotAuthenticatedException;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
