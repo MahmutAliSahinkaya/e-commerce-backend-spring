@@ -5,7 +5,6 @@ import com.ecommerce.productservice.dto.ProductDto;
 import com.ecommerce.productservice.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,14 +20,12 @@ public class ProductController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ProductDto> addProduct(@RequestBody ProductDto productDto) {
         ProductDto addedProduct = productService.addProduct(productDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(addedProduct);
     }
 
     @PutMapping("/{productId}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ProductDto> updateProduct(@PathVariable Long productId,
                                                     @RequestBody ProductDto productDto) {
         ProductDto updatedProduct = productService.updateProduct(productId, productDto);

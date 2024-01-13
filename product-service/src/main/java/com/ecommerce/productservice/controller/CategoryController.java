@@ -4,7 +4,6 @@ import com.ecommerce.productservice.dto.CategoryDto;
 import com.ecommerce.productservice.service.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,14 +19,12 @@ public class CategoryController {
     }
 
     @PostMapping("/add")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CategoryDto> addCategory(@RequestBody CategoryDto category) {
         CategoryDto addedCategory = categoryService.addCategory(category);
         return ResponseEntity.status(HttpStatus.CREATED).body(addedCategory);
     }
 
     @PutMapping("/update/{categoryId}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CategoryDto> updateCategory(@PathVariable Long categoryId,
                                                       @RequestBody CategoryDto category) {
         CategoryDto updatedCategory = categoryService.updateCategory(categoryId, category);
