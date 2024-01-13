@@ -1,6 +1,5 @@
 package com.ecommerce.apigateway.config;
 
-import com.ecommerce.apigateway.filter.JwtAuthenticationFilter;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
 import io.github.resilience4j.timelimiter.TimeLimiterConfig;
 import org.springframework.cloud.circuitbreaker.resilience4j.ReactiveResilience4JCircuitBreakerFactory;
@@ -20,11 +19,7 @@ import java.time.LocalDateTime;
 
 @Configuration
 public class GatewayConfig {
-    private final JwtAuthenticationFilter filter;
 
-    public GatewayConfig(JwtAuthenticationFilter filter) {
-        this.filter = filter;
-    }
 
     @Bean
     public RouteLocator routes(RouteLocatorBuilder builder) {
