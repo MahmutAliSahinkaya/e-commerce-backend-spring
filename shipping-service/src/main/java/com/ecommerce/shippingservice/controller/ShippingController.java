@@ -5,7 +5,6 @@ import com.ecommerce.shippingservice.entity.Shipment;
 import com.ecommerce.shippingservice.service.ShippingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,21 +18,18 @@ public class ShippingController {
     }
 
     @PostMapping("/create")
-    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Shipment> createShipment(@RequestBody ShipmentDto shipmentDto) {
         Shipment shipment = shippingService.createShipment(shipmentDto);
         return new ResponseEntity<>(shipment, HttpStatus.CREATED);
     }
 
     @GetMapping("/track/{shipmentId}")
-    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<ShipmentDto> trackShipment(@PathVariable Long shipmentId) {
         ShipmentDto shipmentDto = shippingService.trackShipment(shipmentId);
         return new ResponseEntity<>(shipmentDto, HttpStatus.OK);
     }
 
     @PutMapping("/update/{shipmentId}")
-    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Void> updateShipment(@PathVariable Long shipmentId,
                                                @RequestBody ShipmentDto shipmentDto) {
         shippingService.updateShipment(shipmentId, shipmentDto);
