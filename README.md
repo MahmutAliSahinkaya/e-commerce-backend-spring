@@ -155,7 +155,7 @@ docker ps
 ```
 
 ## License
-This project is licensed under the MIT License. For more information, please refer to the LICENSE
+This project is licensed under the MIT License. For more information, please refer to the LICENSE file.
 
 ## Contributing
 Contributions to the project are welcome. For more details, please refer to the CONTRIBUTING file.
