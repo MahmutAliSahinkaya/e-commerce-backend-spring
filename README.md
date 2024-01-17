@@ -151,7 +151,7 @@ docker ps
 ```
 
 ## License
-This project is licensed under the MIT License. For more information, please refer to the [LICENSE]([https://github.com/MahmutAliSahinkaya/e-commerce-backend-spring/blob/master/LICENSE)])
+This project is licensed under the MIT License. For more information, please refer to the LICENSE
 
 ## Contributing
 Contributions to the project are welcome. For more details, please refer to the CONTRIBUTING file.
