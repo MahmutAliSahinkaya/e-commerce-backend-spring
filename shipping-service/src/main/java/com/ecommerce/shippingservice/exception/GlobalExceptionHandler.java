@@ -1,7 +1,6 @@
 package com.ecommerce.shippingservice.exception;
 
 import com.ecommerce.shippingservice.dto.ErrorResponseDto;
-import org.apache.kafka.common.errors.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 build:
   version: "3.0"
 
-reportservice:
+report-service:
   message: "E-Commerce-App report service development APIs"
   contactDetails:
     name: "Mahmut Ali Şahinkaya - Developer"

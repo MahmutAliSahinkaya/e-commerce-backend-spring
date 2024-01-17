@@ -3,38 +3,38 @@ USE orders_db;
 
 CREATE TABLE IF NOT EXISTS carts
 (
-    cart_id    BIGINT AUTO_INCREMENT PRIMARY KEY,
-    user_id    BIGINT,
-    created_at DATETIME,
-    created_by VARCHAR(255),
-    updated_at DATETIME,
-    updated_by VARCHAR(255)
+    cart_id   BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id   BIGINT NOT NULL,
+    createdAt DATETIME,
+    createdBy VARCHAR(255),
+    updatedAt DATETIME,
+    updatedBy VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS cart_items
 (
     cart_item_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    product_id   BIGINT,
-    quantity     BIGINT,
+    product_id   BIGINT NOT NULL,
+    quantity     BIGINT NOT NULL CHECK (quantity >= 1),
     cart_id      BIGINT,
-    created_at   DATETIME,
-    created_by   VARCHAR(255),
-    updated_at   DATETIME,
-    updated_by   VARCHAR(255),
-    FOREIGN KEY (cart_id) REFERENCES carts (cart_id)
+    createdAt    DATETIME,
+    createdBy    VARCHAR(255),
+    updatedAt    DATETIME,
+    updatedBy    VARCHAR(255),
+    FOREIGN KEY (cart_id) REFERENCES carts (cart_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS orders
 (
     order_id          BIGINT AUTO_INCREMENT PRIMARY KEY,
     order_date        DATETIME,
-    order_description TEXT,
-    total_amount      DECIMAL(10, 2),
-    order_status      VARCHAR(50),
+    order_description VARCHAR(255),
+    total_amount      DECIMAL                                                 NOT NULL CHECK (total_amount >= 0),
+    order_status      ENUM ('PREPARING', 'SHIPPED', 'DELIVERED', 'CANCELLED') NOT NULL,
     cart_id           BIGINT,
-    created_at        DATETIME,
-    created_by        VARCHAR(255),
-    updated_at        DATETIME,
-    updated_by        VARCHAR(255),
-    FOREIGN KEY (cart_id) REFERENCES carts (cart_id)
+    createdAt         DATETIME,
+    createdBy         VARCHAR(255),
+    updatedAt         DATETIME,
+    updatedBy         VARCHAR(255),
+    FOREIGN KEY (cart_id) REFERENCES carts (cart_id) ON DELETE CASCADE
 );

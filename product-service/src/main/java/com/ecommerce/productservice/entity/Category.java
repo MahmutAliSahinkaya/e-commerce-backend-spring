@@ -1,6 +1,7 @@
 package com.ecommerce.productservice.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.Set;
@@ -19,6 +20,7 @@ public class Category extends BaseEntity {
     @Column(name = "category_id", unique = true, nullable = false, updatable = false)
     private Long categoryId;
 
+    @NotBlank(message = "Category title is required")
     @Column(name = "category_title")
     private String categoryTitle;
 

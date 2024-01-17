@@ -9,30 +9,22 @@ spring:
     url: jdbc:mysql://localhost:3310/shippings_db
     username: root
     password: root
-#    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
   sql:
     init:
       mode: always
   config:
     import: "optional:configserver:http://localhost:8071/"
   cloud:
-    function:
-      definition: updateCommunication
-    stream:
-      bindings:
-        updateCommunication-in-0:
-          destination: communication-sent
-          group: ${spring.application.name}
-        sendCommunication-out-0:
-          destination: send-communication
-      kafka:
-        binder:
-          brokers:
-            - localhost:9092
+    openfeign:
+      circuitbreaker:
+        enabled: true
+
 management:
   endpoints:
     web:
@@ -110,7 +102,3 @@ resilience4j.ratelimiter:
       limitRefreshPeriod: 5000
       limitForPeriod: 1
 
-jwt:
-  secret: mySecretKey
-  expireMs: 120000
-  refreshExpireMs: 120000

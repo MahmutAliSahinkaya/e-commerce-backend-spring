@@ -15,7 +15,6 @@ public class FavouriteController {
 
     private final FavouriteService favouriteService;
 
-    @Autowired
     public FavouriteController(FavouriteService favouriteService) {
         this.favouriteService = favouriteService;
     }

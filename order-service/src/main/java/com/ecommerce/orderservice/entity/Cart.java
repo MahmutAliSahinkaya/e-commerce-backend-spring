@@ -1,6 +1,7 @@
 package com.ecommerce.orderservice.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.Set;
@@ -19,6 +20,7 @@ public class Cart extends BaseEntity {
     @Column(name = "cart_id", unique = true, nullable = false, updatable = false)
     private Long cartId;
 
+    @NotNull(message = "User id cannot be null")
     @Column(name = "user_id")
     private Long userId;
 

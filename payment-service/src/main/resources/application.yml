@@ -9,11 +9,12 @@ spring:
     url: jdbc:mysql://localhost:3309/payments_db
     username: root
     password: root
-#    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
   sql:
     init:
       mode: always
@@ -113,7 +114,3 @@ resilience4j.ratelimiter:
       limitRefreshPeriod: 5000
       limitForPeriod: 1
 
-jwt:
-  secret: mySecretKey
-  expireMs: 120000
-  refreshExpireMs: 120000

@@ -1,6 +1,9 @@
 package com.ecommerce.reportservice.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -19,10 +22,24 @@ public class ReportItem extends BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reportItemId;
+
+    @NotBlank(message = "Identifier is required")
     private String identifier;
+
+    @NotNull(message = "Gross sales is required")
+    @Min(value = 0, message = "Gross sales must be greater than or equal to 0")
     private float grossSales;
+
+    @NotNull(message = "Net sales is required")
+    @Min(value = 0, message = "Net sales must be greater than or equal to 0")
     private float netSales;
+
+    @NotNull(message = "Orders count is required")
+    @Min(value = 0, message = "Orders count must be greater than or equal to 0")
     private int ordersCount;
+
+    @NotNull(message = "Products count is required")
+    @Min(value = 0, message = "Products count must be greater than or equal to 0")
     private int productsCount;
 
     public ReportItem(String identifier) {

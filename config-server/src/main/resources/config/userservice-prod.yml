@@ -1,7 +1,7 @@
 build:
   version: "1.0"
 
-userservice:
+user-service:
   message: "E-Commerce-App user service production stage APIs"
   contactDetails:
     name: "Mahmut Ali Şahinkaya - Developer"

@@ -1,0 +1,3448 @@
+{
+  "info": {
+    "_postman_id": "fd4f6304-8d8a-43fc-9d14-da9d413e47d0",
+    "name": "E-CommerceApp API",
+    "description": "E commerce App",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24990187"
+  },
+  "item": [
+    {
+      "name": "Keycloak",
+      "item": [
+        {
+          "name": "ClientCredentials_AccessToken",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "text"
+                },
+                {
+                  "key": "client_id",
+                  "value": "ecommerceapi",
+                  "type": "text"
+                },
+                {
+                  "key": "client_secret",
+                  "value": "SvmU3rJT2npejvnluw3wqGJgaMpMjZ9f",
+                  "type": "text"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "realms",
+                "master",
+                "protocol",
+                "openid-connect",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Favourite Service API",
+      "item": [
+        {
+          "name": "Add Product to Favourites",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/favourites/{userId}/products/{productId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "favourites",
+                "{userId}",
+                "products",
+                "{productId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Product from Favourites",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/favourites/{userId}/products/{productId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "favourites",
+                "{userId}",
+                "products",
+                "{productId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Favourite Products",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/favourites/{userId}/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "favourites",
+                "{userId}",
+                "products"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "API collection for Favourite Service in E-Commerce App",
+      "auth": {
+        "type": "oauth2",
+        "oauth2": [
+          {
+            "key": "state",
+            "value": "qw12we-123asas-3asasa",
+            "type": "string"
+          },
+          {
+            "key": "authUrl",
+            "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+            "type": "string"
+          },
+          {
+            "key": "useBrowser",
+            "value": true,
+            "type": "boolean"
+          },
+          {
+            "key": "tokenName",
+            "value": "authcode_accesstoken",
+            "type": "string"
+          },
+          {
+            "key": "accessTokenUrl",
+            "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+            "type": "string"
+          },
+          {
+            "key": "clientSecret",
+            "value": "SvmU3rJT2npejvnluw3wqGJgaMpMjZ9f",
+            "type": "string"
+          },
+          {
+            "key": "clientId",
+            "value": "ecommerceapi",
+            "type": "string"
+          },
+          {
+            "key": "scope",
+            "value": "openid email profile",
+            "type": "string"
+          },
+          {
+            "key": "client_authentication",
+            "value": "body",
+            "type": "string"
+          },
+          {
+            "key": "addTokenTo",
+            "value": "header",
+            "type": "string"
+          }
+        ]
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Order Service API",
+      "item": [
+        {
+          "name": "Add Item to Cart",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"cartItemId\": 1,\n    \"productId\": 1,\n    \"quantity\": 1,\n    \"cartId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8072/carts/items",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "carts",
+                "items"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Cart Item",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"cartItemId\": 1,\n    \"productId\": 1,\n    \"quantity\": 1,\n    \"cartId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8072/carts/items/{cartItemId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "carts",
+                "items",
+                "{cartItemId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Item from Cart",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/carts/items/{cartItemId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "carts",
+                "items",
+                "{cartItemId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Order",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"orderId\": 1,\n    \"orderDate\": \"2023-03-01T10:15:30\",\n    \"orderDescription\": \"This is a sample order\",\n    \"totalAmount\": 100.0,\n    \"orderStatus\": \"PREPARING\",\n    \"cartDto\": {\n        \"cartId\": 1\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8072/orders",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "orders"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Order",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"orderId\": 1,\n    \"orderDate\": \"2023-03-01T10:15:30\",\n    \"orderDescription\": \"This is a sample order\",\n    \"totalAmount\": 100.0,\n    \"orderStatus\": \"PREPARING\",\n    \"cartDto\": {\n        \"cartId\": 1\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8072/orders/{orderId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "orders",
+                "{orderId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Order by Id",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/orders/{orderId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "orders",
+                "{orderId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Orders by Date",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/orders/by_date?startDate=2023-03-01&endDate=2023-03-31",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "orders",
+                "by_date"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2023-03-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2023-03-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Order",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/orders/{orderId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "orders",
+                "{orderId}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "API collection for Order Service in E-Commerce App"
+    },
+    {
+      "name": "Product Service API",
+      "item": [
+        {
+          "name": "Add Product",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"productId\": 1,\n    \"productTitle\": \"Sample Product\",\n    \"imageUrl\": \"http://example.com/sample.jpg\",\n    \"sku\": \"SAMPLE001\",\n    \"priceUnit\": 100.0,\n    \"quantity\": 10,\n    \"categoryDto\": {\n        \"categoryId\": 1,\n        \"categoryTitle\": \"Sample Category\",\n        \"imageUrl\": \"http://example.com/sample-category.jpg\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8072/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"productId\": 1,\n    \"productTitle\": \"Sample Product\",\n    \"imageUrl\": \"http://example.com/sample.jpg\",\n    \"sku\": \"SAMPLE001\",\n    \"priceUnit\": 100.0,\n    \"quantity\": 10,\n    \"categoryDto\": {\n        \"categoryId\": 1,\n        \"categoryTitle\": \"Sample Category\",\n        \"imageUrl\": \"http://example.com/sample-category.jpg\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8072/products/{productId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "products",
+                "{productId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Product by Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/products/{productId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "products",
+                "{productId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Product Details by Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/products/{productId}/details",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "products",
+                "{productId}",
+                "details"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/products/search?keyword={keyword}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "products",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "{keyword}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter Products by Category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/products/filter?categoryId={categoryId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "products",
+                "filter"
+              ],
+              "query": [
+                {
+                  "key": "categoryId",
+                  "value": "{categoryId}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Stock",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/products/{productId}/stock?quantity={quantity}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "products",
+                "{productId}",
+                "stock"
+              ],
+              "query": [
+                {
+                  "key": "quantity",
+                  "value": "{quantity}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Price",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/products/{productId}/price?price={price}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "products",
+                "{productId}",
+                "price"
+              ],
+              "query": [
+                {
+                  "key": "price",
+                  "value": "{price}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/products/{productId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "products",
+                "{productId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Category",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"categoryId\": 1,\n    \"categoryTitle\": \"electronic\",\n    \"imageUrl\": \"http://example.com/image.jpg\",\n    \"subCategories\": [],\n    \"productDtos\": [],\n    \"parentCategoryDto\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8072/categories/add",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "categories",
+                "add"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"categoryId\": 1,\n    \"categoryTitle\": \"electronic\",\n    \"imageUrl\": \"http://example.com/image.jpg\",\n    \"subCategories\": [],\n    \"productDtos\": [],\n    \"parentCategoryDto\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8072/categories/update/{categoryId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "categories",
+                "update",
+                "{categoryId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Category by Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/categories/{categoryId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "categories",
+                "{categoryId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/categories/list",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "categories",
+                "list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Assign Product to Category",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/categories/{productId}/assign/{categoryId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "categories",
+                "{productId}",
+                "assign",
+                "{categoryId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Product from Category",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/categories/{productId}/remove/{categoryId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "categories",
+                "{productId}",
+                "remove",
+                "{categoryId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/categories/delete/{categoryId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "categories",
+                "delete",
+                "{categoryId}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "API collection for Product Service in E-Commerce App"
+    },
+    {
+      "name": "Report Service API",
+      "item": [
+        {
+          "name": "Get Sales Report",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/reports/sales?startDate=2023-03-01&endDate=2023-03-31",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "reports",
+                "sales"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2023-03-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2023-03-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Inventory Report",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/reports/inventory",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "reports",
+                "inventory"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "API collection for Report Service in E-Commerce App"
+    },
+    {
+      "name": "Shipping Service API",
+      "item": [
+        {
+          "name": "Create Shipment",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"orderId\": 1,\n    \"trackingNumber\": \"123456789\",\n    \"status\": \"PENDING\",\n    \"shippedDate\": \"2023-01-01T00:00:00\",\n    \"estimatedDeliveryDate\": \"2023-01-10T00:00:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8072/shippings/create",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "shippings",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Track Shipment",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/shippings/track/{shipmentId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "shippings",
+                "track",
+                "{shipmentId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Shipment",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"orderId\": 1,\n    \"trackingNumber\": \"123456789\",\n    \"status\": \"SHIPPED\",\n    \"shippedDate\": \"2023-01-01T00:00:00\",\n    \"estimatedDeliveryDate\": \"2023-01-10T00:00:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8072/shippings/update/{shipmentId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "shippings",
+                "update",
+                "{shipmentId}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "API collection for Shipping Service in E-Commerce App"
+    },
+    {
+      "name": "User Service API",
+      "item": [
+        {
+          "name": "Create User",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"firstName\": \"testfirstname\",\n    \"lastName\": \"testlastname\",\n    \"username\": \"testusername\",\n    \"imageUrl\": \"http://example.com/test.jpg\",\n    \"email\": \"test@example.com\",\n    \"phone\": \"1234567890\",\n    \"addressDtos\": [\n        {\n            \"fullAddress\": \"123 test St\",\n            \"postalCode\": \"12345\",\n            \"city\": \"test\"\n        }\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8072/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by Id",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/users/{userId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "users",
+                "{userId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"firstName\": \"updatefirstname\",\n    \"lastName\": \"updatelastname\",\n    \"username\": \"updateusername\",\n    \"imageUrl\": \"http://example.com/test.jpg\",\n    \"email\": \"updatetest@example.com\",\n    \"phone\": \"1234567890\",\n    \"addressDtos\": [\n        {\n            \"fullAddress\": \"updatetest\",\n            \"postalCode\": \"12345\",\n            \"city\": \"test\"\n        }\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8072/users/{userId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "users",
+                "{userId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/users/{userId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "users",
+                "{userId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Address to User",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"fullAddress\": \"test address\",\n    \"postalCode\": \"12345\",\n    \"city\": \"test\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8072/addresses/{userId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "addresses",
+                "{userId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Address Details",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"fullAddress\": \"update test address\",\n    \"postalCode\": \"12345\",\n    \"city\": \"update test city\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8072/addresses/{userId}/{addressId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "addresses",
+                "{userId}",
+                "{addressId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Address Details by Id",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/addresses/{userId}/{addressId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "addresses",
+                "{userId}",
+                "{addressId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Address by Id",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/addresses/{userId}/{addressId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "addresses",
+                "{userId}",
+                "{addressId}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "API collection for User Service in E-Commerce App"
+    },
+    {
+      "name": "Payment Service API",
+      "item": [
+        {
+          "name": "Process Payment",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"paymentId\": 1,\n    \"userId\": 1,\n    \"isPayed\": false,\n    \"paymentStatus\": \"NOT_STARTED\",\n    \"orderDto\": {\n        \"orderId\": 1,\n        \"orderDate\": \"2022-12-31T23:59:59\",\n        \"orderDescription\": \"Order description\",\n        \"totalAmount\": 100.0\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8072/payments/process",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "payments",
+                "process"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validate Payment",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8072/payments/validate/{paymentId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "payments",
+                "validate",
+                "{paymentId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Payment by User Id",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "clientSecret",
+                  "value": "V1IeGwlVTW4PWFxyPVvyvnwvvH4XitI0",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "ecommerceapi-ac",
+                  "type": "string"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "http://localhost:7080/realms/master/protocol/openid-connect/auth",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid email profile",
+                  "type": "string"
+                },
+                {
+                  "key": "useBrowser",
+                  "value": true,
+                  "type": "boolean"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "authcode_accesstoken",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/payments/details/{userId}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "payments",
+                "details",
+                "{userId}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "API collection for Payment Service in E-Commerce App"
+    },
+    {
+      "name": "Notification Service API",
+      "item": [
+        {
+          "name": "email",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"paymentId\": 123456,\r\n    \"isPayed\": true,\r\n    \"userEmail\": \"user@example.com\",\r\n    \"userPhone\": \"+1234567890\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/email",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "email"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "sms",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"paymentId\": 123456,\r\n    \"isPayed\": true,\r\n    \"userEmail\": \"user@example.com\",\r\n    \"userPhone\": \"+1234567890\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "emailsms",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"paymentId\": 123456,\r\n    \"isPayed\": true,\r\n    \"userEmail\": \"user@example.com\",\r\n    \"userPhone\": \"+1234567890\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "API collection for Notification Service in E-Commerce App"
+    }
+  ]
+}

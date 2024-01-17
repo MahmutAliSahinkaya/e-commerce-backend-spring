@@ -3,45 +3,45 @@ USE shippings_db;
 
 CREATE TABLE IF NOT EXISTS shipment_details
 (
-    shipment_details_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    recipient_name      VARCHAR(255),
-    recipient_address   TEXT,
-    recipient_phone     VARCHAR(50),
-    shipping_cost       DOUBLE,
-    weight              BIGINT,
-    created_at          DATETIME,
-    created_by          VARCHAR(255),
-    updated_at          DATETIME,
-    updated_by          VARCHAR(255)
+    shipmentDetailsId BIGINT AUTO_INCREMENT PRIMARY KEY,
+    recipientName     VARCHAR(255) NOT NULL,
+    recipientAddress  VARCHAR(255) NOT NULL,
+    recipientPhone    VARCHAR(255) NOT NULL,
+    shippingCost      DECIMAL      NOT NULL,
+    weight            BIGINT       NOT NULL,
+    createdAt         DATETIME,
+    createdBy         VARCHAR(255),
+    updatedAt         DATETIME,
+    updatedBy         VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS shipment
 (
-    shipment_id             BIGINT AUTO_INCREMENT PRIMARY KEY,
-    order_id                BIGINT,
-    tracking_number         VARCHAR(255),
-    shipment_status         VARCHAR(50),
-    tracking_info           TEXT,
-    shipped_date            DATETIME,
-    estimated_delivery_date DATETIME,
-    shipment_details_id     BIGINT,
-    created_at              DATETIME,
-    created_by              VARCHAR(255),
-    updated_at              DATETIME,
-    updated_by              VARCHAR(255),
-    FOREIGN KEY (shipment_details_id) REFERENCES shipment_details (shipment_details_id)
+    shipmentId            BIGINT AUTO_INCREMENT PRIMARY KEY,
+    orderId               BIGINT                                                NOT NULL,
+    trackingNumber        VARCHAR(255)                                          NOT NULL,
+    shipmentStatus        ENUM ('PENDING', 'SHIPPED', 'CANCELLED', 'DELIVERED') NOT NULL,
+    trackingInfo          VARCHAR(255),
+    shippedDate           DATETIME,
+    estimatedDeliveryDate DATETIME,
+    shipment_details_id   BIGINT,
+    createdAt             DATETIME,
+    createdBy             VARCHAR(255),
+    updatedAt             DATETIME,
+    updatedBy             VARCHAR(255),
+    FOREIGN KEY (shipment_details_id) REFERENCES shipment_details (shipmentDetailsId)
 );
 
 CREATE TABLE IF NOT EXISTS shipping_option
 (
-    shipping_option_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    carrier            VARCHAR(255),
-    service_type       VARCHAR(255),
-    cost               DOUBLE,
-    delivery_speed     VARCHAR(50),
-    description        TEXT,
-    created_at         DATETIME,
-    created_by         VARCHAR(255),
-    updated_at         DATETIME,
-    updated_by         VARCHAR(255)
+    shippingOptionId BIGINT AUTO_INCREMENT PRIMARY KEY,
+    carrier          VARCHAR(255)            NOT NULL,
+    serviceType      VARCHAR(255)            NOT NULL,
+    cost             DECIMAL                 NOT NULL,
+    deliverySpeed    ENUM ('NORMAL', 'FAST') NOT NULL,
+    description      VARCHAR(255),
+    createdAt        DATETIME,
+    createdBy        VARCHAR(255),
+    updatedAt        DATETIME,
+    updatedBy        VARCHAR(255)
 );

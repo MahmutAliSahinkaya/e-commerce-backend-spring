@@ -1,7 +1,7 @@
 build:
   version: "1.0"
 
-favouriteservice:
+favourite-service:
   message: "E-Commerce-App favourite service production stage APIs"
   contactDetails:
     name: "Mahmut Ali Şahinkaya - Developer"

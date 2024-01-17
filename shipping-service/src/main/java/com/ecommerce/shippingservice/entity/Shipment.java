@@ -2,6 +2,7 @@ package com.ecommerce.shippingservice.entity;
 
 import com.ecommerce.shippingservice.entity.enums.ShipmentStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +21,11 @@ public class Shipment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long shipmentId;
+
+    @NotNull
     private Long orderId;
+
+    @NotNull
     private String trackingNumber;
 
     @Enumerated(EnumType.STRING)
