@@ -134,7 +134,11 @@ installed, you can bring up the project with the following command:
         - docker image push docker.io/mahmutali/notification-service:v1
 ```
 <b>3)</b> Run the project with Docker Compose:
- 
+
+```shell
+cd e-commerce-backend-spring/docker-compose/default
+```
+
 ```shell
 docker-compose up
 ```
