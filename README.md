@@ -136,10 +136,6 @@ installed, you can bring up the project with the following command:
 <b>3)</b> Run the project with Docker Compose:
 
 ```shell
-cd e-commerce-backend-spring/docker-compose/default
-```
-
-```shell
 docker-compose up
 ```
 Add the '-d' parameter to run the services in the background.
@@ -155,7 +151,7 @@ docker ps
 ```
 
 ## License
-This project is licensed under the MIT License. For more information, please refer to the LICENSE file.
+This project is licensed under the MIT License. For more information, please refer to the LICENSE
 
 ## Contributing
 Contributions to the project are welcome. For more details, please refer to the CONTRIBUTING file.
