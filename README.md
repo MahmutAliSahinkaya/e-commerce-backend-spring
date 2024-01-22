@@ -41,7 +41,7 @@ Each service performs specific functions and contributes to the overall operatio
 - Keycloak
 - Grafana Loki (Read and Write)
 - Promtail
-- Minio
+- MinIO
 - Prometheus
 - Grafana
 - Tempo
